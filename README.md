@@ -14,7 +14,7 @@ convert-RM-to-bed.py converts a RepeatMasker outfile into a bedlike file compata
 Prepare_RM_Files.py Prepares the bedlike RepeatMasker files for use in the variant detection and characterization steps.
 Performing_Alignments.py is used to align one reference genome to another.
 Process_Paftools_Output.py processes the output from the alignment, isolating SNPs and SNVs as well as identifying the autosomal genome length of the alignment.
-Create_Detect_Hallmarks_CMDs.py creates the commands that Detect_Hallmarks_Revamp.py uses to characterize the variants. Detect_Hallmarks_Revamp.py relies upon Detecting_Hallmarks_Functions.py.
+Create_Detect_Hallmarks_CMDs.py creates the commands that Detect_Hallmarks_Revamp.py uses to characterize the variants. Detect_Hallmarks_Revamp.py relies upon Detecting_Hallmarks_Functions.py. (Detecting_Hallmarks_Functions.py is a heavily revised version of the script by the same name in PMID: 38946312)
 Post_Processing_after_Hallmarks.py handles post processing as well as some miscellanious analyses such as TSD and poly(A) distributions, estimating the rate of retrotransposition, and subfamily fraction calculations. This script utilizes Blacksmith_Post_Processing_Utils.py.
 python Aggregate_Calls_Revised_List.py  aggregates loci together while tracking which genomes possess each variant.
 Loci_By_Chrom_Revised_List.ipynb processes the output from Aggregate_Calls_Revised_List.py and generates UpSet plots.
@@ -27,3 +27,4 @@ Manuscript_Statistics.ipynb handles some general processing and calculates the m
 Identify_Target_Site_Deletions.py as the name implies can be used to identify which variants possess target site deletions, and reports some summary statistics.
 python Identify_heterozygous_dimorphic_SINEs.py identifies heterozygous variants in GSD1.
 Process_Locus_for_Diagram.py can be used to easy comparisons of filled sites and empty sites from a list of variants. The script relies upon Produce_Miropeats_Image.py and requires manual curation to ensure that variants are visualized properly.
+
