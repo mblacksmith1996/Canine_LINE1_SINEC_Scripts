@@ -150,8 +150,10 @@ for dictionary in list_of_dicts:
     
     if int(dictionary['Refined_Empty_left_bound']) < int(dictionary['Refined_Empty_right_bound']):
         mod = ""
+        reverse_status = "False"
     else:
         mod = "-i"
+        reverse_status = "True"
     #extract with samtools
     extract_cmd = f"samtools faidx {path_to_filled} {dictionary['#chr']}:{filled_start_with_extra}-{filled_end_with_extra} > {args.outdir}/{file_prefix}_filled_extract.fa"
     subprocess.run(extract_cmd,shell=True)
@@ -174,7 +176,7 @@ for dictionary in list_of_dicts:
     
     #prep miropeats command
     miro_path = "/nfs/turbo/umms-jmkidd/matt-projects/Former_KiddLabScratch_Data/inter-genome_comparisons/Aligning_Using_2.26/Produce_Miropeats_Image.py"
-    cmd = f"python {miro_path} --genome1_path {path_to_filled} --genome2_path {path_to_empty} --genome1_coords {dictionary['#chr']}:{filled_start}-{filled_end} --genome2_coords {dictionary['#chr']}:{empty_start}-{empty_end}"
+    cmd = f"python {miro_path} --genome1_path {path_to_filled} --genome2_path {path_to_empty} --genome1_coords {dictionary['#chr']}:{filled_start}-{filled_end} --genome2_coords {dictionary['#chr']}:{empty_start}-{empty_end} --reverse {reverse_status}"
     subprocess.run(cmd,shell=True)
 
 

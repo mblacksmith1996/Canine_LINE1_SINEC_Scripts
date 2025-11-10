@@ -10,40 +10,10 @@ parser.add_argument("--genome1_coords",dest="gen1_coords",required=True,help="Ge
 parser.add_argument("--genome2_coords",dest="gen2_coords",required=True,help="Genomic location in sample 2 (empty). Assemes 1 indexed")
 parser.add_argument("--reverse",dest="rev",required=False,default="False",help="If true, rev comp the empty site")
 args = parser.parse_args()
-
-# Returns complement of a bp.  If not ACGT then return same char
-def complement(c):
-    if c == 'A':
-        return 'T'
-    if c == 'T':
-        return 'A'
-    if c == 'C':
-        return 'G'
-    if c == 'G':
-        return 'C'
-    if c == 'a':
-        return 't'
-    if c == 't':
-        return 'a'
-    if c == 'c':
-        return 'g'
-    if c == 'g':
-        return 'c'
-    # If not ACTGactg simply return same character
-    return c    
-
-def revcomp(seq):
-    c = ''
-    seq = seq[::-1] #reverse
-    # Note, this good be greatly sped up using list operations
-    seq = [complement(i) for i in seq]
-    c = ''.join(seq)
-    return c
-    
-    
-locus_info = {}
+   
 
 #populate relevant variables into locus_info
+locus_info = {}
 locus_info["coords1"] = args.gen1_coords
 locus_info["coords2"] = args.gen2_coords
 locus_info["gen1_path"] = args.gen1_path
@@ -66,28 +36,15 @@ print(locus_info)
 
 extract1_prefix = f"{locus_info['coords1_list_string']}_extract1_miropeats.fa"
 extract2_prefix = f"{locus_info['coords1_list_string']}_extract2_miropeats.fa"
+if args.rev == "True" or args.rev == True:
+    modifier = "-i"
+else:
+    modifier = ""
 extract1 = f"samtools faidx {locus_info['gen1_path']} {locus_info['coords1_list_string']} > {extract1_prefix}"
-extract2 = f"samtools faidx {locus_info['gen2_path']} {locus_info['coords2_list_string']} > {extract2_prefix}"
+extract2 = f"samtools faidx {modifier} {locus_info['gen2_path']} {locus_info['coords2_list_string']} > {extract2_prefix}"
 subprocess.run(extract1,shell=True)
 subprocess.run(extract2,shell=True)
 
-
-#handle revcomp if necessary
-if args.rev == "False" or args.rev == False:
-    with open(extract2_prefix,'rt') as infile:
-        seq_string = ""
-        for line in infile:
-            if line.startswith(">"):
-                header_line = line
-            else:
-                seq_string = seq_string + line.rstrip()
-        seq_string2 = revcomp(seq_string) + "\n"
-    extract2_prefix = f"{locus_info['coords1_list_string']}_extract2_miropeats_revcomp.fa"
-    with open(extract2_prefix,'wt') as outfile:
-        outfile.write(header_line)
-        outfile.write(seq_string2)
-        
-#RepeatMasker the locus 
 rm1 = f"RepeatMasker -species dog {extract1_prefix} {extract2_prefix}"
 subprocess.run(rm1,shell=True)
 
