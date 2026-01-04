@@ -22,9 +22,10 @@ Transduction_Detection.py identifies putative LINE-1 3' transductions.
 Transduction_Blat_Driver.sh is a command line utility to run the blat alignment of the transductions against the G_WOLF genome
 Process_Blat_PSLX_Output.ipynb processes the blat pslx outfiles, calculates transduction fractions, and identifies parentless transductions.
 Compare_Alignments.ipynb generates counts of LINE-1s and SINECs per chromosome per sample and plots the result.
-Poly_A_Check.ipynb is used to calculate the fractions of variants with TSDs and Poly(A)s using less restrictive parameters.
+#Poly_A_Check.ipynb is used to calculate the fractions of variants with TSDs and Poly(A)s using less restrictive parameters. THIS FILE IS DEPRECATED
 Manuscript_Statistics.ipynb handles some general processing and calculates the mean and standard deviation for estimates such as the rate of retrotransposition.
 Identify_Target_Site_Deletions.py as the name implies can be used to identify which variants possess target site deletions, and reports some summary statistics.
 python Identify_heterozygous_dimorphic_SINEs.py identifies heterozygous variants in GSD1.
 Process_Locus_for_Diagram.py can be used to easy comparisons of filled sites and empty sites from a list of variants. The script relies upon Produce_Miropeats_Image.py and requires manual curation to ensure that variants are visualized properly.
-
+scale_up_testing_poly_a_all_genomes.py a script designed to test relaxed hallmark filtering parameters for all genomes.
+scale_up_testing_poly_a_cmds_maker.py a driver script to generate commands for scale_up_testing_poly_a_cmds_maker.py
