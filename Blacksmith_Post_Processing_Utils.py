@@ -360,7 +360,7 @@ def create_hallmark_stack_barplot(np,mpl,canine_dict,Categories_dict,TE_type,mis
             if len(Categories_dict[key_name]) <= 4:
                 Categories_dict[key_name].append(canine_dict[key_name][1])
             if state == "ref" and canine == misc_info_dict['canines'][0]: #canines[0] will be Mischka for the main dataset. 
-                capital_dogs.append(misc_info_dict['canines'][-1]) #the altname for the reference is always set as last in the canine names
+                capital_dogs.append(misc_info_dict['canines_alt_names'][-1]) #the altname for the reference is always set as last in the canine names
             elif state == "query":
                 capital_dogs.append(misc_info_dict["canines_alt_names"][i])
             if state == "query" or (state == "ref" and canine == misc_info_dict['canines'][0]):
